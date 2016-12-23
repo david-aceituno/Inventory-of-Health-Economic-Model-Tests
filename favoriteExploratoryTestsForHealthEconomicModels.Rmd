@@ -1,0 +1,51 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# <span style="color:indianred">Test Inventory for Health Economic Models</span>
+
+###  Life Expectancy 
+The life expectancy test sets
+
+- the discount rate for QALYs to zero 
+- all dis-utilities to zero, and 
+- disease-specific mortality rates to the all-cause mortality rates.  
+
+This test should confirm that the model correctly estimates the life expectancy of the target population.  
+
+###  Quality-Adjusted Life Expectancy  
+An extension of the life expectancy test is the quality adjusted life expectancy test. 
+
+This test confirms that total QALYs of a given intervention are equal to its total years of life by setting health states (other than Dead) utility values to 1.0 and all dis-utilities of adverse events to zero. 
+
+###  Total Undiscounted Intervention Costs 
+This test confirms the lifetime discounted costs equal the lifetime undiscounted costs of the intervention when the discount rate for costs is set to zero.
+
+###  Changes in Intervention Cost   
+This test asserts that a linear increase (decrease) in the intervention (e.g., drug) cost results in a linear increase (decrease) in the incremental cost-effectiveness ratio (ICER) for pairwise strategy comparisons.
+
+```{r, echo=FALSE}
+plot(data.frame(c(100, 200, 400, 800, 1600), c(5000, 10000, 20000, 40000, 80000)),type="b",xlab="intervention unit cost",ylab="ICER")
+```
+
+This plot shows a visual test that also can be operationalized as a formal statistical test.
+
+
+###Cohort Size  
+This test confirms that the size of the cohort in a cohort state-transition model remains the same over the planning horizon when the sum of the patients in all health states equals the cohort size at each cycle.
+
+###Non-Negative    
+This test confirms the number of patients in each health state in all cycles is always greater than or equal to zero.
+
+###Sample PSA Input Mean 
+This test confirms that the mean of the input generated for the probabilistic sensitivity analysis (PSA) represents the pre-defined mean of the given input parameter. 
+
+###Sample PSA Input Distribution 
+This test confirms that the input generated for the probabilistic sensitivity analysis (PSA) represents the pre-defined distribution of the given input parameter. 
+
+Specifically, the [Kolmogorov-Smirnov Test](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/ks.test.html) can test for each input parameter whether the Monte Carlo simulation drew the correct distribution. 
